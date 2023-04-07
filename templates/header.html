@@ -1,0 +1,14 @@
+<div class="headerMain">
+	<div class="authreg">
+		<a href="/login">login</a>
+		<a href="/registration">Registration</a>	
+	</div>
+	
+
+	{% if session %} 
+	<div class="logout">
+		<span>User: {{nameUser}}</span>	
+		<a href="/logout">logout</a>
+	</div>
+	{% endif %} 
+</div>

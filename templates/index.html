@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  
+</head>
+<body>
+
+<html>
+   {% include 'header.html' %}  
+   <body>
+   {% if session %} 
+   <div class="form">  
+      <h3>Your post</h3>  
+      <form action="" method = "POST" enctype="multipart/form-data">  
+         <div class="form_inner">
+            <p>Name:{{ nameUser }}</p>
+            <textarea name="post" rows="10" cols="30"></textarea>
+            <input type="file" class="button-4" name="file" />  
+            <input type = "submit" class="button-68" value="submit" />  
+         </div>
+      </form>
+   </div>
+   {% endif %}   
+
+   <div class="posts">
+   {% for post in posts: %}  
+      <div class="post">
+         {% if post.nameImage %} 
+         <img src="{{ url_for('static', filename=post.nameImage) }}" width="200" height="200">
+         {% endif %} 
+         <p>{{post.id}} - {{ post.name }} - {{post.text}}</p>   
+      </div>
+   {% endfor %}     
+   </div>
+   
+   </body>  
+</html>  
+
+</body>
+</html>

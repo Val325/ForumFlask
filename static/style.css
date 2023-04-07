@@ -1,0 +1,88 @@
+body {
+  margin: 0px;
+  padding: 0px;   
+  background-color: rgb(248, 248, 248);  
+}
+
+.headerMain {
+  width: 100vw;
+  height: 40px;
+  background-color: rgb(20, 20, 20); 
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.headerMain > div > a,span{
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.headerMain > a, span {
+  
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
+}
+.form_inner, .registration_form, .login_form, .post{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  background-color: white; 
+}
+
+
+
+/* CSS */
+.button-68 {
+  appearance: none;
+  backface-visibility: hidden;
+  background-color: #27ae60;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.5;
+  outline: none;
+  overflow: hidden;
+  padding: 13px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.button-68:hover {
+  background-color: #1e8449;
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: .35s;
+}
+
+.button-68:active {
+  transform: translateY(2px);
+  transition-duration: .35s;
+}
+
+.button-68:hover {
+  box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
+}

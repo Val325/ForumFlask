@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  
+</head>
+
+
+<html>  
+   <body>  
+      <div class="post">
+         <h1>Прогноз погоды в Запорожье, лол:</h1>
+         <h2>Сегодня {{ todayTime }}</h2>
+         <h2>температура на сегодня {{ forecastToday }}</h2>
+         <h2>температура на завтра {{ forecastTomorrow }}</h2>
+      </div>
+   </body>  
+</html>
