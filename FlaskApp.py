@@ -64,26 +64,33 @@ class Text(Base):
     text = Column(String)
     nameImage = Column(String)
     pathPost = Column(String) # URL for post
+    profilePic = Column(String)
 
 class Users(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
     user = Column(String)
     password = Column(String)
+    pathToProfilePicture = Column(String) 
 
 Base.metadata.create_all(bind=engine)
 
 @app.route('/',methods = ['POST', 'GET'])
 def index():
-
-    IsAuth = session["auth"]
-    User = session["user"]
-    image_src = ''
-    filename = ''
+    try:
+        IsAuth = session["auth"]
+        User = session["user"]
+    
+        image_src = ''
+        filename = ''
+        
+        profilePic = ""
+        print("auth:",session["auth"])
+        print("username:",session["user"])
+    except KeyError:
+        IsAuth = False
+        User = "anon"
     postPath = "/"
-
-    print("auth:",session["auth"])
-    print("username:",session["user"])
 
     #--------------#
     # Upload image #
@@ -112,8 +119,20 @@ def index():
 
     with Session(autoflush=False, bind=engine) as db:
         posts = db.query(Text).filter(Text.pathPost==postPath)
-        for p in posts:
-            print(f"id:{p.id};user:{p.name};post:{p.text};image:{p.nameImage}")
+        userDB = db.query(Users).filter(Users.user==User).one_or_none()
+
+        try:
+            profilePic = userDB.pathToProfilePicture
+        
+
+            for p in posts:
+                print(f"id:{p.id};user:{p.name};post:{p.text};image:{p.nameImage}")
+
+        
+            print(f"id:{userDB.id};user:{userDB.user};post:{userDB.pathToProfilePicture}")
+
+        except AttributeError:
+            profilePic = ""
 
         if request.method == 'POST':
             result = request.form
@@ -121,7 +140,11 @@ def index():
             print(result.get('post',''))
             
             with Session(autoflush=False, bind=engine) as db:
-                post = Text(name=User, text=result.get('post',''), nameImage=filename, pathPost=postPath)
+                post = Text(name=User,
+                            text=result.get('post',''), 
+                            nameImage=filename, 
+                            pathPost=postPath,
+                            profilePic=profilePic)
                 db.add(post)     
                 db.commit()     
                 
@@ -136,7 +159,7 @@ def index():
 
 @app.route('/registration',methods = ['POST', 'GET'])
 def registration():
-    
+    userImage = ""
     if request.method == 'POST':
         print("registration route here post")
 
@@ -150,8 +173,8 @@ def registration():
         print("Hashed password:", hashed)
 
         with Session(autoflush=False, bind=engine) as db:
-            User = Users(user=user, password=hashed)
-            db.add(User)     
+            User = Users(user=user, password=hashed, pathToProfilePicture=userImage)
+            db.add(User)
             db.commit()
             return redirect("/")
 
@@ -206,15 +229,20 @@ def post(id):
     DbNameImage = ''
     dataFile = download_file(request)
     posts = []
-
+    userImage = ""
     
     
     with Session(autoflush=False, bind=engine) as dbOut:
         post = dbOut.get(Text, id)
         posts = dbOut.query(Text).filter(Text.pathPost==DbPathImage)
+        user = dbOut.query(Users).filter(Users.user==User).one_or_none()
         for p in posts:
             print(f"Подпосты - id:{p.id};user:{p.name};post:{p.text};image:{p.nameImage}")
+
         print(f"id:{post.id};user:{post.name};post:{post.text};image:{post.nameImage}")
+        print(f"User - id:{user.id};user:{user.user};pictueProfile:{user.pathToProfilePicture}")
+        
+        userImage = user.pathToProfilePicture
         idUser = post.id
         DbUser = post.name
         DbPost = post.text
@@ -232,11 +260,11 @@ def post(id):
             with Session(autoflush=False, bind=engine) as db:
                 result = request.form
                 
-                #Нужно получить из формы
                 Post = Text(name=DbUser,
                     text=result.get('post',''), 
                     nameImage=dataFile["filename"], 
-                    pathPost=DbPathImage)
+                    pathPost=DbPathImage,
+                    profilePic=userImage)
                 db.add(Post)     
                 db.commit()
 
@@ -247,7 +275,35 @@ def post(id):
         session=IsAuth, 
         nameUser=post.name,
         nameImage=DbNameImage,
-        posts=posts)
+        posts=posts,
+        image=userImage)
+#
+@app.route('/profile',methods = ['POST', 'GET'])
+def profile():
+    user = session["user"]
+    userImage = ""
+    dataFile = None
+    
+    with Session(autoflush=False, bind=engine) as db:
+        try:
+            userDB = db.query(Users).filter(Users.user==user).one_or_none()
+            print(f"{userDB.id}.{userDB.user}")
+            userImage = userDB.pathToProfilePicture
+        except AttributeError:
+            print("User not finded")
+    if request.method == 'POST':
+        dataFile = download_file(request)
+        print("данные картинки в профиле", dataFile)
+        with Session(autoflush=False, bind=engine) as db:
+            
+                userDB = db.query(Users).filter(Users.user==user).one_or_none()
+                userDB.pathToProfilePicture = dataFile["filename"]
+              
+                db.commit()
+    if dataFile:
+        return render_template('profile.html', name=user, image=userImage)
+    else:
+        return render_template('profile.html', name=user) 
 
 @app.route('/weather',methods = ['POST', 'GET'])
 def weatherAPI():

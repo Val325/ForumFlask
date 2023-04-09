@@ -14,9 +14,13 @@
       <h3>Your post</h3>  
       <form action="/post/{{id}}" method = "POST" enctype="multipart/form-data">  
          <div class="form_inner">
+            <img src="{{ url_for('static', filename=image) }}" width="200" height="200">
             <p>Name:{{ nameUser }}</p>
-            <textarea name="post" rows="10" cols="30"></textarea>
-            <input type="file" name="file" />  
+            <textarea name="post" rows="10" class="btn" cols="30"></textarea>
+            <div class="upload-btn-wrapper">
+               <button class="btn">Upload a file</button>
+               <input type="file" class="button-4" name="file" />  
+            </div>
             <input type = "submit" class="button-68" value="submit" />  
          </div>
       </form>
@@ -34,6 +38,7 @@
    {% for post in posts: %}  
       <div class="post">
          {% if post.nameImage %} 
+         <img src="{{ url_for('static', filename=post.profilePic) }}" width="200" height="200">
          <img src="{{ url_for('static', filename=post.nameImage) }}" width="200" height="200">
          {% endif %} 
          <p>{{post.id}} - {{ post.name }} - {{post.text}}</p>   

@@ -15,8 +15,14 @@
       <form action="" method = "POST" enctype="multipart/form-data">  
          <div class="form_inner">
             <p>Name:{{ nameUser }}</p>
+            <img src="{{ url_for('static', filename=image) }}" width="200" height="200">
             <textarea name="post" rows="10" cols="30"></textarea>
-            <input type="file" class="button-4" name="file" />  
+
+            <div class="upload-btn-wrapper">
+               <button class="btn">Upload a file</button>
+               <input type="file" class="button-4" name="file" />  
+            </div>
+
             <input type = "submit" class="button-68" value="submit" />  
          </div>
       </form>
@@ -29,7 +35,9 @@
          {% if post.nameImage %} 
          <img src="{{ url_for('static', filename=post.nameImage) }}" width="200" height="200">
          {% endif %} 
-         <p>{{post.id}} - {{ post.name }} - {{post.text}}</p>   
+         <p>{{post.id}} - {{ post.name }} - {{post.text}}</p>
+         <input type="button" class="btn" onclick="location.href='/post/{{post.id}}';" value="Go to thread" />
+   
       </div>
    {% endfor %}     
    </div>
