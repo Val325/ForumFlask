@@ -20,16 +20,31 @@ from DB import Database, Text, Users
 from func import allowed_file, download_file
 from flask import Blueprint
 from config import UPLOADS_PATH, ALLOWED_EXTENSIONS
+from flask_paginate import Pagination, get_page_args
+from pagination import amountItemsInDB, get_current_page, get_max_page, get_DB, max_page_per
+from pagination import get_next_page, get_previous_page, amount_articles_per_page, get_array_number_page
 
 app = Flask(__name__)
 engine = Database(app)
 #with app.app_context():
 
 posts = Blueprint('post', __name__)
-print("engine:",engine)
+print("engine:", engine)
+print("array", get_array_number_page(amountItemsInDB()))
+print("current_amount_pages",get_current_page())
+print("current_page",get_current_page())
+print("amount_articles_per_page", amount_articles_per_page(amountItemsInDB()))
+print("array_amount_articles_per_page", get_array_number_page(amount_articles_per_page(amountItemsInDB())))
+articles_per_page_arr = get_array_number_page(amount_articles_per_page(amountItemsInDB()))
 
-@posts.route('/',methods = ['POST', 'GET'])
-def index():
+
+
+@posts.route('/')
+def redir():
+    return redirect("/1")
+
+@posts.route('/<page>',methods = ['POST', 'GET'])
+def index(page):
     try:
         IsAuth = session["auth"]
         User = session["user"]
@@ -101,11 +116,14 @@ def index():
                 db.add(post)     
                 db.commit()     
                 
-            return redirect("/")
+            return redirect("/1")
             #return render_template('index.html', posts=posts)
         else:
-
-            return render_template('index.html', posts=posts,
+            # от 0 до 5, а при каждом щелчке page + 5
+            # первый 0:5 [0 + 5 * page:5 + 5 * page]; page = 1 
+            # второй 5:10
+            return render_template('index.html', posts=posts[0 + 5 * int(page):5 + 5 * int(page)],
                 session=IsAuth, 
                 nameUser=User,
-                image=profilePic)	
+                image=profilePic,
+                pages=articles_per_page_arr)	

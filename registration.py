@@ -22,8 +22,9 @@ from flask import Blueprint
 app = Flask(__name__)
 engine = Database(app)
 registrationUser = Blueprint('registration', __name__)
+bcrypt = Bcrypt(app)
 
-@registrationUser.route('/login',methods = ['POST', 'GET'])
+@registrationUser.route('/registration',methods = ['POST', 'GET'])
 def registration():
     userImage = ""
     if request.method == 'POST':

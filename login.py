@@ -22,6 +22,7 @@ from flask import Blueprint
 app = Flask(__name__)
 engine = Database(app)
 login = Blueprint('login', __name__)
+bcrypt = Bcrypt(app)
 
 @login.route('/login',methods = ['POST', 'GET'])
 def loginAuth():

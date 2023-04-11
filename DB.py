@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import  Column, Integer, String
 from sqlalchemy import select
 from flask_bcrypt import Bcrypt
+from config import PASSWORD_DB, NAME_DB
 
 
 
