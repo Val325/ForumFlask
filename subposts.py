@@ -44,14 +44,17 @@ def post(id):
     with Session(autoflush=False, bind=engine) as dbOut:
         post = dbOut.get(Text, id)
         posts = dbOut.query(Text).filter(Text.pathPost==DbPathImage)
-        user = dbOut.query(Users).filter(Users.user==User).one_or_none()
+        
+        user = dbOut.query(Users).filter(Users.id==id).one_or_none()
         for p in posts:
             print(f"Подпосты - id:{p.id};user:{p.name};post:{p.text};image:{p.nameImage}")
 
-        print(f"id:{post.id};user:{post.name};post:{post.text};image:{post.nameImage}")
-        print(f"User - id:{user.id};user:{user.user};pictueProfile:{user.pathToProfilePicture}")
         
-        userImage = user.pathToProfilePicture
+        
+        print(f"id:{post.id};user:{post.name};post:{post.text};image:{post.nameImage}")
+        #print(f"User - id:{user.id};user:{user.user};pictueProfile:{user.pathToProfilePicture}")
+        userImage = post.profilePic
+
         idUser = post.id
         DbUser = post.name
         DbPost = post.text

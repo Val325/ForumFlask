@@ -1,15 +1,13 @@
 <div class="headerMain">
-	{% if session == None %} 
-	<div class="authreg">
-		<a href="/login">login</a>
-		<a href="/registration">Registration</a>	
-	</div>
-	{% endif %}
-
 	{% if session %} 
 	<div class="logout">
 		<span>User: {{nameUser}}</span>	
 		<a href="/logout">logout</a>
+	</div>
+	{% else %}
+	<div class="authreg">
+		<a href="/login">login</a>
+		<a href="/registration">Registration</a>	
 	</div>
 	{% endif %} 
 </div>
