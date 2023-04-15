@@ -1,12 +1,20 @@
-FROM python:3.10-5alpine
+FROM python:3.10.5-alpine
 
 WORKDIR /code
 
 COPY requirements.txt /code
 COPY . /code
 
-RUN apt-get update
-RUN apt-get install python3.10.5
+EXPOSE 5000:5000
+EXPOSE 5432:5432
+
+RUN apk update 
+RUN apk add py3-psycopg2
+RUN apk add postgresql-dev
+RUN apk add gcc
+RUN apk add python3-dev
+RUN apk add musl-dev
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-CMD ["flask", "--app", "FlaskApp", "run"]
+CMD ["python", "FlaskApp.py"]
