@@ -19,4 +19,4 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
-CMD ["python", "FlaskApp.py"]
+CMD ["flask", "--app", "FlaskApp", "run"]
