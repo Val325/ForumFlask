@@ -1,7 +1,7 @@
 <div class="headerMain">
 	{% if session %} 
 	<div class="logout">
-		<span>User: {{nameUser}}</span>	
+		<a href="/profile"><span>User: {{nameUser}}</span></a>	
 		<a href="/logout">logout</a>
 	</div>
 	{% else %}
