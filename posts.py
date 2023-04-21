@@ -41,7 +41,7 @@ articles_per_page_arr = get_array_number_page(amount_articles_per_page(amountIte
 
 @posts.route('/')
 def redir():
-    return redirect("/1")
+    return redirect("/0")
 
 @posts.route('/<page>',methods = ['POST', 'GET'])
 def index(page):
@@ -112,11 +112,12 @@ def index(page):
                             text=result.get('post',''), 
                             nameImage=filename, 
                             pathPost=postPath,
-                            profilePic=profilePic)
+                            profilePic=profilePic,
+                            category=result.get('select_cat',''))
                 db.add(post)     
                 db.commit()     
                 
-            return redirect("/1")
+            return redirect("/0")
             #return render_template('index.html', posts=posts)
         else:
             # от 0 до 5, а при каждом щелчке page + 5

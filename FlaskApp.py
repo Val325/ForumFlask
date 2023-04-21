@@ -19,6 +19,7 @@ import login
 import registration
 import posts
 import subposts
+import category
 from DB import Database, Text, Users
 from func import allowed_file, download_file
 
@@ -38,6 +39,7 @@ app.register_blueprint(login.login)
 app.register_blueprint(posts.posts)
 app.register_blueprint(subposts.subposts)
 app.register_blueprint(registration.registrationUser)
+app.register_blueprint(category.cat)
     
 
 

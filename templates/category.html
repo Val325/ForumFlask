@@ -5,15 +5,13 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  
 </head>
 <body>
-
-<html>
    {% include 'header.html' %}  
-   <body>
+   <h1>{{category}}</h1>
    {% if session %} 
    <h3>Your post</h3>
    <div class="form">  
       <div class="form_inner">  
-         <form action="" method = "POST" enctype="multipart/form-data">
+         <form action="/category/{{category}}" method = "POST" enctype="multipart/form-data">
          <div class="sendMsg">
             <div class="imagepic">
                   {% if image %} 
@@ -24,17 +22,6 @@
                
                <div class="textregion">
                   <textarea name="post" rows="10" cols="30"></textarea>
-                  <div class="radio_btn">
-                     <input type="radio" id="cat1" name="select_cat" value="category1">
-                     <label for="cat1">category 1</label><br>
-
-                     <input type="radio" id="cat2" name="select_cat" value="category2">
-
-                     <label for="cat2">category 2</label><br>
-                     <input type="radio" id="cat3" name="select_cat" value="category3">
-
-                     <label for="cat3">category 3</label><br><br>
-                  </div>
                   <div class="upload-btn-wrapper">
                      <button class="btn btnform">Upload a file</button>
                      <input type="file" class="button-4" name="file" />  
@@ -72,10 +59,8 @@
    {% endfor %}     
    </div>
    {% for page in pages: %}
-      <input type="button" class="btn" onclick="location.href='/{{page}}';" value="{{page + 1}}" />
+      <input type="button" class="btn" onclick="location.href='/category/{{category}}/{{page}}';" value="{{page + 1}}" />
    {% endfor %}  
    </body>  
-</html>  
-
 </body>
 </html>

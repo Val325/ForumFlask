@@ -47,6 +47,19 @@ def amountItemsInDB():
 		print(amount)
 	return amount
 
+def amountItemsInDB_S(category):
+	amount = 0
+	with Session(autoflush=False, bind=engine) as db:
+    	# получение всех объектов
+		user_posts = db.query(Text).filter(Text.category == category)
+		print("---------")
+		for p in user_posts:
+			print(f"id:{p.id};user:{p.name};post:{p.text};image:{p.nameImage}")
+			amount = amount + 1
+		
+		print(amount)
+	return amount
+
 def get_DB(offset=0, per_page=5):
 	amount = 0
 	with Session(autoflush=False, bind=engine) as db:

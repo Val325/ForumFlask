@@ -115,6 +115,7 @@ body {
   box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
 }
 .upload-btn-wrapper {
+
   position: relative;
   overflow: hidden;
   display: inline-block;
@@ -154,7 +155,12 @@ textarea {
 input[name="Password"]{
   margin-bottom: 10px;
 }
-
+.btnform{
+  width: 100%;
+}
+.form_inner {
+  width: 505px;
+}
 .post {
   width: auto;
   display: flex;
@@ -165,4 +171,19 @@ input[name="Password"]{
   display: flex;
   flex-direction: column;
   margin-top: 40px;  
+}
+.sendMsg {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+}
+.textregion {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.radio_btn {
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
 }

@@ -23,6 +23,7 @@ class Text(Base):
 	text = Column(String)
 	nameImage = Column(String)
 	pathPost = Column(String) # URL for post
+	category = Column(String)
 	profilePic = Column(String)
 	
 class Users(Base):
