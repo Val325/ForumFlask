@@ -69,3 +69,17 @@ def ret_profile_picture(user):
 			profilePic = ""
 
 	return profilePic
+
+def send_category_post(request, name, text, nameImage, pathPost, profilePic, category):
+
+	with Session(autoflush=False, bind=engine) as db:
+			
+			
+			Post = Text(name=name,
+						text=text, 
+						nameImage=nameImage, 
+						pathPost=pathPost,
+						profilePic=profilePic,
+						category=str(category))
+			db.add(Post)     
+			db.commit()

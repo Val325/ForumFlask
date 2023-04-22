@@ -41,7 +41,7 @@ articles_per_page_arr = get_array_number_page(amount_articles_per_page(amountIte
 
 @posts.route('/')
 def redir():
-    return redirect("/0")
+    return redirect("/category")
 
 @posts.route('/<page>',methods = ['POST', 'GET'])
 def index(page):
