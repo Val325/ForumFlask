@@ -6,12 +6,18 @@
 </head>
 <body>
    {% include 'header.html' %}
+<div>
+   <a href="/category/category1/0">
+      <div class="post">
+            <div class="categoryPost">1 category</div>
+      </div>
+      
+   </a>
+   {% for post in category1: %}
+      <div class="SubCategoryPost">id:{{post.id}} post: {{post.text}}</div>
+   {% endfor %}
+</div>
 
-<a href="/category/category1/0">
-   <div class="post">
-         <div class="categoryPost">1 category</div>
-   </div>
-</a>
 
 <a href="/category/category2/0">
    <div class="post">   

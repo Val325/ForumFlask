@@ -20,9 +20,16 @@ def category():
 	print("user:", User)
 
 
+	category1 = return_posts_by_category('category1')
+	category2 = return_posts_by_category('category2')
+	category3 = return_posts_by_category('category3')
+
 	return render_template('categoryChoice.html',
 				session=IsAuth, 
-                nameUser=User)	
+                nameUser=User,
+                category1=category1[0:3],
+                category2=category2[0:3],
+                category3=category3[0:3])	
 
 @cat.route('/category/<category>/<page>',methods = ['POST', 'GET'])
 def index(category,page):
