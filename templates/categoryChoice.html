@@ -2,47 +2,75 @@
 <html>
 <head>
 <title>Page Title</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-down-r.css' rel='stylesheet'> 
 </head>
 <body>
    {% include 'header.html' %}
 
 <div>
-   <a href="/category/category1/0">
-      <div class="post">
-            <div>1 category</div>
+   
+      <div class="post iconsShow1">
+            <div>
+               <i class="gg-arrow-down-r icons"></i>
+            </div>
+            
+            
+            
+
+            <a href="/category/category1/0">
+               <div>1 category</div>
+            </a>
+
       </div>
-      <h3>Последние сообщения</h3>
-   </a>
-   {% for post in category1: %}
-      <div class="post categoryPost">{{post.text}}</div>
-   {% endfor %}
+   <div class="first_post_category_1">
+      {% for post in category1: %}
+         <a href="/post/{{post.id}}"><div class="post categoryPost">{{post.text}}</div></a>
+      {% endfor %}
+   </div>
 </div>
 
 <div>
-   <a href="/category/category2/0">
-      <div class="post">
-            <div>2 category</div>
+   
+      <div class="post iconsShow2">
+            <i class="gg-arrow-down-r icons"></i>
+
+            <a href="/category/category2/0">
+               <div>2 category</div>
+            </a>
+
       </div>
-      <h3>Последние сообщения</h3>
-   </a>
+   
+   <div class="first_post_category_2">
    {% for post in category2: %}
-      <div class="post categoryPost">{{post.text}}</div>
+   <div>
+      <a href="/post/{{post.id}}"><div class="post categoryPost">{{post.text}}</div></a>
+   </div>
    {% endfor %}
+   </div>
 </div>
 
 <div>
-   <a href="/category/category3/0">
-      <div class="post">
-            <div>3 category</div>
+   
+      <div class="post iconsShow3">
+            <i class="gg-arrow-down-r icons"></i>
+
+            <a href="/category/category3/0">
+               <div>3 category</div>
+            </a>
+
       </div>
-      <h3>Последние сообщения</h3>
-   </a>
+   <div class="first_post_category_3">
    {% for post in category3: %}
-      <div class="post categoryPost">{{post.text}}</div>
+   <div>
+      <a href="/post/{{post.id}}"><div class="post categoryPost">{{post.text}}</div></a>
+   </div>
    {% endfor %}
+   </div>
 </div>
 
 
-</body><script src="{{url_for('static', filename='js/popup.js')}}"></script>
+
+
+</body><script src="{{url_for('static', filename='js/category.js')}}"></script>
 </html>

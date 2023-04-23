@@ -27,6 +27,7 @@ bcrypt = Bcrypt(app)
 @registrationUser.route('/registration',methods = ['POST', 'GET'])
 def registration():
     userImage = ""
+
     if request.method == 'POST':
         print("registration route here post")
 
@@ -35,6 +36,12 @@ def registration():
 
         print("Password: ", request.form.get('Password',''))
         password = request.form.get('Password','')
+
+        if len(password) < 8:
+            
+            print('dont create')
+            return render_template('registration.html', error=True)
+
 
         hashed = bcrypt.generate_password_hash(password).decode('utf-8') 
         print("Hashed password:", hashed)

@@ -175,6 +175,11 @@ input[name="Password"]{
   display: flex;
   flex-direction: column;
   margin-top: 40px;  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
 }
 .sendMsg {
   display: flex;
@@ -192,12 +197,18 @@ input[name="Password"]{
   flex-direction: row;
 }
 .categoryPost {
-  margin-left: 100px;
+  margin-top: 5px;
+  margin-left: 50px;
   width: 400px;
 }
 .weather {
   flex-direction: column;
   width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)  
 }
 .back-btn {
   margin-top: 10px;
@@ -210,8 +221,39 @@ input[name="Password"]{
 }
 
 .formBlock,.form_inner {
-  transition: opacity 2s;
+  transition: opacity 2s linear;
 }
 .formBlock{
   opacity: 1;
+}
+.disappear {
+  position: absolute;
+  top: -5000px; 
+  left: -5000px;
+}
+.iconsShow {
+ margin-right: 10px;
+}
+.icons {
+  margin-right: 10px;
+}
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }
