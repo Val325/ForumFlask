@@ -6,29 +6,43 @@
 </head>
 <body>
    {% include 'header.html' %}
+
 <div>
    <a href="/category/category1/0">
       <div class="post">
-            <div class="categoryPost">1 category</div>
+            <div>1 category</div>
       </div>
-      
+      <h3>Последние сообщения</h3>
    </a>
    {% for post in category1: %}
-      <div class="SubCategoryPost">id:{{post.id}} post: {{post.text}}</div>
+      <div class="post categoryPost">{{post.text}}</div>
+   {% endfor %}
+</div>
+
+<div>
+   <a href="/category/category2/0">
+      <div class="post">
+            <div>2 category</div>
+      </div>
+      <h3>Последние сообщения</h3>
+   </a>
+   {% for post in category2: %}
+      <div class="post categoryPost">{{post.text}}</div>
+   {% endfor %}
+</div>
+
+<div>
+   <a href="/category/category3/0">
+      <div class="post">
+            <div>3 category</div>
+      </div>
+      <h3>Последние сообщения</h3>
+   </a>
+   {% for post in category3: %}
+      <div class="post categoryPost">{{post.text}}</div>
    {% endfor %}
 </div>
 
 
-<a href="/category/category2/0">
-   <div class="post">   
-         <div class="categoryPost">2 category</div>
-   </div>
-</a>   
-
-<a href="/category/category3/0">
-   <div class="post"> 
-         <div class="categoryPost">3 category</div>
-   </div>
-</a>
-</body>
+</body><script src="{{url_for('static', filename='js/popup.js')}}"></script>
 </html>

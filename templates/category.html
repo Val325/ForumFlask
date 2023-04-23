@@ -8,8 +8,8 @@
    {% include 'header.html' %}  
    <h1>{{category}}</h1>
    {% if session %} 
-   <h3>Your post</h3>
-   <div class="form">  
+   <h3 class="popup">Show/hide form</h3>
+   <div class="form formBlock">  
       <div class="form_inner">  
          <form action="/category/{{category}}/{{current_page}}" method = "POST" enctype="multipart/form-data">
          <div class="sendMsg">
@@ -61,6 +61,8 @@
    {% for page in pages: %}
       <input type="button" class="btn" onclick="location.href='/category/{{category}}/{{page}}';" value="{{page + 1}}" />
    {% endfor %}  
-   </body>  
+
+   </body><script src="{{url_for('static', filename='js/popup.js')}}"></script>
 </body>
+
 </html>

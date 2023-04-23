@@ -14,11 +14,15 @@ engine = Database(app)
 
 @cat.route('/category',methods = [ 'GET'])
 def category():
-	IsAuth = session["auth"]
-	print("session:", IsAuth)
-	User = session["user"]
-	print("user:", User)
-
+	try:
+		IsAuth = session["auth"]
+		print("session:", IsAuth)
+		User = session["user"]
+		print("user:", User)
+	except KeyError:
+		IsAuth = False
+		User = ""
+		print("user not foudn")
 
 	category1 = return_posts_by_category('category1')
 	category2 = return_posts_by_category('category2')
@@ -33,11 +37,16 @@ def category():
 
 @cat.route('/category/<category>/<page>',methods = ['POST', 'GET'])
 def index(category,page):
-	IsAuth = session["auth"]
-	print("session:", IsAuth)
-	User = session["user"]
-	print("user:", User)
-	print("category", category)
+	try:
+		IsAuth = session["auth"]
+		print("session:", IsAuth)
+		User = session["user"]
+		print("user:", User)
+		print("category", category)
+	except KeyError:
+		IsAuth = False
+		User = ""
+		print("user not foudn")
 
 	idUser = ''
 	DbUser = ''

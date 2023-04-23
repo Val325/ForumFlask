@@ -191,3 +191,27 @@ input[name="Password"]{
   display: flex;
   flex-direction: row;
 }
+.categoryPost {
+  margin-left: 100px;
+  width: 400px;
+}
+.weather {
+  flex-direction: column;
+  width: 600px;
+}
+.back-btn {
+  margin-top: 10px;
+}
+.popup:hover {
+  color: gray;
+}
+.popup:active {
+  color: darkgray;
+}
+
+.formBlock,.form_inner {
+  transition: opacity 2s;
+}
+.formBlock{
+  opacity: 1;
+}
