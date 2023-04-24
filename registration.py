@@ -16,7 +16,7 @@ from sqlalchemy import  Column, Integer, String
 from sqlalchemy import select
 from flask_bcrypt import Bcrypt
 from DB import Database, Text, Users
-from func import allowed_file, download_file
+from func import allowed_file, download_file, ret_user
 from flask import Blueprint
 
 app = Flask(__name__)
@@ -36,6 +36,10 @@ def registration():
 
         print("Password: ", request.form.get('Password',''))
         password = request.form.get('Password','')
+
+        if ret_user(user):
+            print('already has user')
+            return render_template('registration.html', error=True)
 
         if len(password) < 8:
             

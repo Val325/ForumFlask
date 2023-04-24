@@ -16,7 +16,7 @@ import getApiWeather
 import profile
 import logout
 import login
-import registration
+#import registration
 import posts
 import subposts
 import category
@@ -69,6 +69,7 @@ def ret_profile_picture(user):
 			profilePic = ""
 
 	return profilePic
+
 
 def send_category_post(request, name, text, nameImage, pathPost, profilePic, category):
 

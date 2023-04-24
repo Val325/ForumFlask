@@ -15,7 +15,7 @@ from flask import Blueprint
 from config import UPLOADS_PATH, ALLOWED_EXTENSIONS
 
 app = Flask(__name__)
-
+engine = Database(app)
 utils = Blueprint('utils', __name__)
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -54,3 +54,9 @@ def download_file(request):
             "file": file
         }
         return filedata
+
+def ret_user(user):
+    with Session(autoflush=False, bind=engine) as db:
+        userDB = db.query(Users).filter(Users.user==user).one_or_none()
+
+    return userDB

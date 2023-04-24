@@ -9,6 +9,7 @@ a {
   text-decoration: none;
   color: black;
 }
+
 .form{
   display: flex;
   justify-content: center;
@@ -61,12 +62,14 @@ a {
 
 .login {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   justify-content: center;
   align-items: center;
 }
 .registration{
   display: flex;
+  flex-direction: column;
   height: 100vh;
   justify-content: center;
   align-items: center;  
@@ -136,7 +139,11 @@ a {
   font-size: 20px;
   font-weight: bold;
 }
-
+.btn:hover{
+  border: 2px solid gray;
+  color: darkgray;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 .upload-btn-wrapper input[type=file] {
   font-size: 100px;
   position: absolute;
@@ -256,4 +263,25 @@ input[name="Password"]{
 
 .closebtn:hover {
   color: black;
+}
+
+/*arrow down icons*/
+.arrow-down-r1{
+  display: block;
+}
+.arrow-down-r2 {
+  display: block;  
+}
+.arrow-down-r3 {
+  display: block;
+}
+/*arrow right icons*/
+.arrow-right-r1{
+  display: block;
+}
+.arrow-right-r2 {
+  display: block;  
+}
+.arrow-right-r3 {
+  display: block;
 }
