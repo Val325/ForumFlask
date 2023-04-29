@@ -17,7 +17,10 @@
             <div class="sendMsg">
 
                <div class="imagepic">
-                  <img src="{{ url_for('static', filename=image) }}" width="200" height="200">
+                  <a href="{{ url_for('static', filename=image) }}">
+                     <img src="{{ url_for('static', filename=image) }}" width="200" height="200">
+                  </a>
+                  
                   <p>Name:{{ nameUser }}</p>
                </div>
 
@@ -45,36 +48,46 @@
          {% if image %} 
          <div class="imagePost">
             <p>id: {{id}} </p>
-            <img src="{{ url_for('static', filename=image) }}" width="200" height="200">
+            <a href="{{ url_for('static', filename=image) }}">
+               <img src="{{ url_for('static', filename=image) }}" width="200" height="200">
+            </a>
+            
             <p>Name:{{ nameUser }}</p>
          </div>
          {% endif %} 
          <div class="contentPost">
             {% if nameImage %} 
+            <a href="{{ url_for('static', filename=nameImage) }}">
                <img src="{{ url_for('static', filename=nameImage) }}" width="200" height="200">
+            </a>
+               
             {% endif %}
                <p>{{text}}</p>
          </div>
          
-         <!--<p>{{id}} - {{ nameUser }} - {{text}}</p>-->   
       </div>   
 
    <div class="posts">
    {% for post in posts: %}  
       <div class="post">
-         {% if post.nameImage %} 
-            {% if post.profilePic %} 
-            <div class="imagePost">
+
+         <div class="imagePost">
             <p>id: {{post.id}} </p>
-               <img src="{{ url_for('static', filename=post.profilePic) }}" width="200" height="200">
-               <p>Name:{{ post.name }}</p>
-                  <input type="button" class="btn" onclick="location.href='/post/{{post.id}}';" value="Go to thread" />
-            </div>
+            {% if post.profilePic %} 
+               <a href="{{ url_for('static', filename=post.profilePic) }}">
+                  <img src="{{ url_for('static', filename=post.profilePic) }}" width="200" height="200">
+               </a>
             {% endif %}
-         <!--<img src="{{ url_for('static', filename=post.profilePic) }}" width="200" height="200">-->
-         <img src="{{ url_for('static', filename=post.nameImage) }}" width="200" height="200">
-         {% endif %} 
-         <!--<p>{{post.id}} - {{ post.name }} - {{post.text}}</p>-->   
+            <p>Name:{{ post.name }}</p>
+         </div>
+         <div class="contentPost">
+            {% if post.nameImage %}    
+               <a href="{{ url_for('static', filename=post.nameImage) }}">
+                  <img src="{{ url_for('static', filename=post.nameImage) }}" width="200" height="200">
+               </a>
+            {% endif %}
+               <p>{{post.text}}</p> 
+         </div>
       </div>   
    {% endfor %}     
    </div>

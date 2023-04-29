@@ -1,14 +1,6 @@
-from flask import Blueprint
-from flask import Flask, redirect
-from flask import render_template
-from flask import request, session
-from os.path import join, dirname, realpath
-from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine  
 from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Session
 from sqlalchemy import  Column, Integer, String
-from sqlalchemy import select
 from flask_bcrypt import Bcrypt
 from config import PASSWORD_DB, NAME_DB
 
@@ -35,6 +27,6 @@ class Users(Base):
 
 def Database(app):
 	bcrypt = Bcrypt(app)
-	engine = create_engine("postgresql://postgres:Hamachi2002@localhost/flaskDB")
+	engine = create_engine(f"postgresql://postgres:{PASSWORD_DB}@localhost/{NAME_DB}")
 	Base.metadata.create_all(bind=engine)
 	return engine

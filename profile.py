@@ -1,17 +1,9 @@
-import os
-from flask import Flask, redirect
+from flask import Flask
 from flask import render_template
 from flask import request, session
-from os.path import join, dirname, realpath
-from werkzeug.utils import secure_filename
-from sqlalchemy import create_engine  
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Session
-from sqlalchemy import  Column, Integer, String
-from sqlalchemy import select
-from flask_bcrypt import Bcrypt
-from DB import Database, Text, Users
-from func import allowed_file, download_file
+from DB import Database, Users
+from func import download_file
 from flask import Blueprint
 
 

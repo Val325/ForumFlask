@@ -1,26 +1,7 @@
-from flask import Flask, redirect, current_app
-from flask import render_template
-from flask import request, session
-from os.path import join, dirname, realpath
-from werkzeug.utils import secure_filename
-from sqlalchemy import create_engine  
-from sqlalchemy.orm import DeclarativeBase
+from flask import Flask
 from sqlalchemy.orm import Session
-from sqlalchemy import  Column, Integer, String
-from sqlalchemy import select
-from flask_bcrypt import Bcrypt
-import datetime
-import requests
-import os
-import getApiWeather
-import profile
-import logout
-import login
-import registration
 import posts
-import subposts
-from DB import Database, Text, Users
-from func import allowed_file, download_file
+from DB import Database, Text
 
 app = Flask(__name__)
 engine = Database(app)

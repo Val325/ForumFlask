@@ -1,11 +1,11 @@
 from flask import Blueprint, Flask
 from flask import request, session, redirect
-from flask import render_template, current_app
-from func import allowed_file, download_file
+from flask import render_template
 from utils import return_posts_by_category, ret_profile_picture, send_category_post
 from DB import Database, Text, Users
-from pagination import amountItemsInDB_S, get_current_page, get_max_page, get_DB, max_page_per, amountItemsInDB
-from pagination import get_next_page, get_previous_page, amount_articles_per_page, get_array_number_page
+from func import download_file
+from pagination import amountItemsInDB_S
+from pagination import amount_articles_per_page, get_array_number_page
 
 app = Flask(__name__)
 cat = Blueprint('category', __name__)

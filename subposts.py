@@ -1,23 +1,9 @@
-import datetime
-import requests
-import os
-import getApiWeather
-import profile
-import logout
-import login
-from flask import Flask, redirect
+from flask import Flask
 from flask import render_template
 from flask import request, session
-from os.path import join, dirname, realpath
-from werkzeug.utils import secure_filename
-from sqlalchemy import create_engine  
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Session
-from sqlalchemy import  Column, Integer, String
-from sqlalchemy import select
-from flask_bcrypt import Bcrypt
 from DB import Database, Text, Users
-from func import allowed_file, download_file
+from func import download_file
 from flask import Blueprint
 
 app = Flask(__name__)
@@ -28,9 +14,11 @@ print("engine:",engine)
 
 @subposts.route('/post/<id>', methods=['GET', 'POST'])  
 def post(id):
-    IsAuth = session["auth"]
-    User = session["user"]
-
+    try:
+        IsAuth = session["auth"]
+        User = session["user"]
+    except KeyError:
+        print('not error')
     idUser = ''
     DbUser = ''
     DbPost = ''
@@ -80,12 +68,20 @@ def post(id):
                 db.add(Post)     
                 db.commit()
 
-
-    return render_template('subposts.html',
-        id=idUser,
-        text=DbPost,
-        session=IsAuth, 
-        nameUser=post.name,
-        nameImage=DbNameImage,
-        posts=posts,
-        image=userImage)
+    try:
+        return render_template('subposts.html',
+            id=idUser,
+            text=DbPost,
+            session=IsAuth, 
+            nameUser=post.name,
+            nameImage=DbNameImage,
+            posts=posts,
+            image=userImage)
+    except UnboundLocalError:
+        return render_template('subposts.html',
+            id=idUser,
+            text=DbPost, 
+            nameUser=post.name,
+            nameImage=DbNameImage,
+            posts=posts,
+            image=userImage)

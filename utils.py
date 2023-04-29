@@ -1,30 +1,62 @@
-from flask import Flask, redirect, current_app
-from flask import render_template
-from flask import request, session
-from os.path import join, dirname, realpath
-from werkzeug.utils import secure_filename
-from sqlalchemy import create_engine  
-from sqlalchemy.orm import DeclarativeBase
+from flask import Flask
+from flask import request
 from sqlalchemy.orm import Session
-from sqlalchemy import  Column, Integer, String
-from sqlalchemy import select
-from flask_bcrypt import Bcrypt
-import datetime
-import requests
-import os
-import getApiWeather
-import profile
-import logout
-import login
-#import registration
-import posts
-import subposts
 import category
 from DB import Database, Text, Users
-from func import allowed_file, download_file
 
 app = Flask(__name__)
 engine = Database(app)
+
+def return_posts_by_category_json_all():
+	json = {}
+	with Session(autoflush=False, bind=engine) as db:
+    	# получение всех объектов
+		user_posts = db.query(Text).all()
+		for post in user_posts:
+			json.update({
+				str(post.id):{
+				"id":post.id,
+				"name":post.name,
+				"text":post.text,
+				"category":post.category,
+				},
+				str(post.name):{
+				"id":post.id,
+				"name":post.name,
+				"text":post.text,
+				"category":post.category,
+				}
+			}) 
+
+	return json
+
+
+def return_all_posts_amount():
+	amount_posts = 0
+	with Session(autoflush=False, bind=engine) as db:
+		user_posts = db.query(Text).all()
+		for post in user_posts:
+			amount_posts = amount_posts + 1
+
+	return amount_posts
+
+def return_posts_by_category_array(category):
+	posts = []
+	with Session(autoflush=False, bind=engine) as db:
+    	# получение всех объектов
+		user_posts = db.query(Text).filter(Text.category == category)
+		for post in user_posts:
+			posts.append(post.id)
+	return posts
+
+def return_posts_by_category_amount(category):
+	amount_posts = 0
+	with Session(autoflush=False, bind=engine) as db:
+    	# получение всех объектов
+		user_posts = db.query(Text).filter(Text.category == category)
+		for post in user_posts:
+			amount_posts = amount_posts + 1
+	return amount_posts
 
 def return_posts_by_category(category):
 	with Session(autoflush=False, bind=engine) as db:

@@ -17,7 +17,9 @@
          <div class="sendMsg">
             <div class="imagepic">
                   {% if image %} 
+                  <a href="{{ url_for('static', filename=image) }}">
                      <img src="{{ url_for('static', filename=image) }}" width="200" height="200">
+                  </a>
                   {% endif %} 
                   <p>Name:{{ nameUser }}</p>  
                </div>
@@ -54,14 +56,20 @@
          <div class="imagePost">
             <p>id: {{post.id}} </p>
                {% if post.profilePic %} 
+               <a href="{{ url_for('static', filename=post.profilePic) }}">
                   <img src="{{ url_for('static', filename=post.profilePic) }}" width="200" height="200">
+               </a>
+                  
                {% endif %}
             <p>Name:{{ post.name }}</p>
             <input type="button" class="btn" onclick="location.href='/post/{{post.id}}';" value="Go to thread" />
          </div>
          <div class="contentPost">
             {% if post.nameImage %} 
+            <a href="{{ url_for('static', filename=post.nameImage) }}">
                <img src="{{ url_for('static', filename=post.nameImage) }}" width="200" height="200">
+            </a>
+               
             {% endif %} 
             <p>{{post.text}}</p>
             

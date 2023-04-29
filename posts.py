@@ -1,28 +1,16 @@
 from flask import Flask, redirect
-from flask import render_template, current_app
+from flask import render_template
 from flask import request, session
-from os.path import join, dirname, realpath
+from os.path import join
 from werkzeug.utils import secure_filename
-from sqlalchemy import create_engine  
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Session
-from sqlalchemy import  Column, Integer, String
-from sqlalchemy import select
-from flask_bcrypt import Bcrypt
-import datetime
-import requests
 import os
-import getApiWeather
-import profile
-import logout
-import login
 from DB import Database, Text, Users
 from func import allowed_file, download_file
 from flask import Blueprint
 from config import UPLOADS_PATH, ALLOWED_EXTENSIONS
-from flask_paginate import Pagination, get_page_args
-from pagination import amountItemsInDB, get_current_page, get_max_page, get_DB, max_page_per
-from pagination import get_next_page, get_previous_page, amount_articles_per_page, get_array_number_page
+from pagination import amountItemsInDB, get_current_page
+from pagination import amount_articles_per_page, get_array_number_page
 
 app = Flask(__name__)
 engine = Database(app)
