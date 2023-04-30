@@ -12,6 +12,7 @@ from config import UPLOADS_PATH, ALLOWED_EXTENSIONS
 from pagination import amountItemsInDB, get_current_page
 from pagination import amount_articles_per_page, get_array_number_page
 
+
 app = Flask(__name__)
 engine = Database(app)
 #with app.app_context():
@@ -52,22 +53,7 @@ def index(page):
     # Upload image #
     #--------------#
 
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            return redirect(request.url)
-        file = request.files['file']
-
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOADS_PATH, filename))
-            image_src = UPLOADS_PATH + filename
-
-        print("Path:", image_src)
-        print('filename', filename)
-        full_filename = os.path.join(os.path.join('uploads'), filename)
+    dataFile = download_file(request)
 
     #--------------#
     # Upload image #
@@ -98,7 +84,7 @@ def index(page):
             with Session(autoflush=False, bind=engine) as db:
                 post = Text(name=User,
                             text=result.get('post',''), 
-                            nameImage=filename, 
+                            nameImage=dataFile["filename"], 
                             pathPost=postPath,
                             profilePic=profilePic,
                             category=result.get('select_cat',''))
